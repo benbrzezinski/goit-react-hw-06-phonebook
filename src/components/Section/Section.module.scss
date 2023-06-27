@@ -1,0 +1,13 @@
+@use "src/utils/scss/mixins.scss" as *;
+
+.section {
+  margin: 50px;
+
+  @include max-width(400px) {
+    margin: 0;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+}

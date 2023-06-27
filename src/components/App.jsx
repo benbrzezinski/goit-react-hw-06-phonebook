@@ -1,28 +1,27 @@
-import { Routes, Route, NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getContacts } from "../redux/selectors";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import Section from "./Section/Section";
+import Form from "./Form/Form";
+import Contacts from "./Contacts/Contacts";
+import Storage from "../utils/storage/localStorage";
 
-const App = () => (
-  <>
-    <header>
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/page2" style={{ marginLeft: 10 }}>
-          Page 2
-        </NavLink>
-      </nav>
-    </header>
-    <main>
-      <Routes>
-        <Route
-          path="/"
-          element={<div style={{ marginTop: 10, marginLeft: 10 }}>Home</div>}
-        />
-        <Route
-          path="/page2"
-          element={<div style={{ marginTop: 10, marginLeft: 10 }}>Page 2</div>}
-        />
-      </Routes>
-    </main>
-  </>
-);
+const App = () => {
+  const contacts = useSelector(getContacts);
+
+  useEffect(() => Storage.setContacts(contacts), [contacts]);
+
+  return (
+    <>
+      <Section>
+        <Form />
+        <Contacts />
+      </Section>
+      <ToastContainer position="top-left" autoClose={3000} theme="colored" />
+    </>
+  );
+};
 
 export default App;
