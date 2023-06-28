@@ -13,13 +13,11 @@ const ContactsItem = () => {
     dispatch(deleteContact(id));
   };
 
-  const filteredContacts = () => {
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().trim().startsWith(filter.toLowerCase().trim())
-    );
-  };
+  const filteredContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().trim().startsWith(filter.toLowerCase().trim())
+  );
 
-  return filteredContacts().map(({ id, name, number }) => (
+  return filteredContacts.map(({ id, name, number }) => (
     <li className={scss.item} key={id}>
       <span className={scss.icon}></span>
       <p className={scss.text}>
